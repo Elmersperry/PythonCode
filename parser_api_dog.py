@@ -1,5 +1,5 @@
 import requests
-from urllib3 import request
+# from urllib3 import request
 from  random import randint
 
 
