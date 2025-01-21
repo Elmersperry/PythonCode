@@ -27,7 +27,7 @@ class Car:
         self._color = "Black"
 
         # Приватный аттрибут
-        self.__speed = None
+        self.__speed = 100
 
     def go(self):
         if self.is_power:
@@ -70,13 +70,46 @@ class Car:
         else:
             raise ValueError('Неправильный цвет')
 
+    # Getter для получения значения скорости
+    @property
+    def speed(self):
+        return self.__speed
+    # Setter для получения значения скорости
+    @speed.setter
+    def speed(self, value):
+        if value > 300:
+            raise ValueError("Max speed = 300")
+        self.__speed = value
+
+# Дочерний класс грузовых машин
+class Truck(Car):
+    # Указываем характеристики родительского и новые характеристики дочернего класса
+    def __init__(self, brand, model, year, power, capacity, axles, currency="RUB"):
+        # Вызываем конструтор родительского класса с его параметрами через функцию super()
+        super().__init__(brand, model, year, power, currency="RUB")
+        self.capacity = capacity
+        self.axles = axles
+        self.__speed = 200
+
+    def tilt_trailer(self):
+        print(f"{self.brand} {self.model} tilt trailer")
+
+    def power_off(self):
+        print("The method of the Truck class")
+
 car_audi = Car(brand="Audi", model="A6", year=2022, power=249)
 car_bmw = Car(brand="BMW", model="X5", year=2022, power=349)
 
-car_audi.power_off()
-car_audi.go()
-car_audi.turn(direction="right")
-car_audi.power_on()
-car_audi.go()
-car_audi.turn(direction="right")
-car_audi.power_off()
+truck = Truck(brand="Volvo", model="XXX", year=2019, power=700, capacity=4000, axles=4)
+truck.power_on()
+truck.power_off()
+truck.tilt_trailer()
+
+# car_audi.power_off()
+# car_audi.go()
+# car_audi.turn(direction="right")
+# car_audi.power_on()
+# car_audi.go()
+# car_audi.turn(direction="right")
+# car_audi.power_off()
+
